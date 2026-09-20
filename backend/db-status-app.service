@@ -1,0 +1,17 @@
+[Unit]
+Description=DB Status App Node.js Backend
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/var/www/db-status-app/backend
+ExecStart=/bin/sh start.sh
+Restart=on-failure
+RestartSec=5
+
+# Переменные окружения загружаются из .env (нужна версия systemd 235+)
+EnvironmentFile=/var/www/db-status-app/backend/.env
+
+[Install]
+WantedBy=multi-user.target
