@@ -1,0 +1,22 @@
+● db-status-app.service - DB Status App Node.js Backend
+     Loaded: loaded (/etc/systemd/system/db-status-app.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2026-09-22 17:07:24 UTC; 45min ago
+   Main PID: 338218 (sh)
+      Tasks: 24 (limit: 1063)
+     Memory: 7.6M
+     CGroup: /system.slice/db-status-app.service
+             ├─338218 /bin/sh start.sh
+             ├─338262 npm start
+             ├─338273 sh -c node index.js
+             └─338275 node index.js
+
+сен 22 17:07:28 oleg sh[338232]: npm warn EBADENGINE }
+сен 22 17:07:30 oleg sh[338232]: up to date, audited 84 packages in 4s
+сен 22 17:07:30 oleg sh[338232]: 17 packages are looking for funding
+сен 22 17:07:30 oleg sh[338232]:   run `npm fund` for details
+сен 22 17:07:30 oleg sh[338232]: found 0 vulnerabilities
+сен 22 17:07:30 oleg sh[338218]: Запуск бэкенда...
+сен 22 17:07:31 oleg sh[338262]: > db-status-backend@1.0.0 start
+сен 22 17:07:31 oleg sh[338262]: > node index.js
+сен 22 17:07:33 oleg sh[338275]: Backend running on http://localhost:80
+сен 22 17:07:33 oleg sh[338275]: DB: localhost:5432/postgres
