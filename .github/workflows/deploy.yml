@@ -2,7 +2,7 @@ name: Deploy DB Status App
 
 on:
   push:
-    branches: [ main ]
+    branches: [ nurjanbek ]
   workflow_dispatch:
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
           script: |
             echo "Starting deployment on server..."
             cd /var/www/db-status-app || exit 1
-            sudo git pull origin main
+            sudo git pull origin nurjanbek
             cd backend
             npm install --production
             sudo systemctl restart db-status-app
