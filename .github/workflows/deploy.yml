@@ -29,9 +29,13 @@ jobs:
           script_stop: true
           script: |
             echo "Starting deployment on server..."
+
             cd /var/www/db-status-app || exit 1
+
             sudo git pull origin main
-            cd backend
-            npm install --production
-            sudo systemctl restart db-status-app
+
+            docker compose up -d --build
+
+            docker compose ps
+
             echo "Deployment successfully completed!"
