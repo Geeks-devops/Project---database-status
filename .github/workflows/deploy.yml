@@ -1,3 +1,4 @@
+```yaml
 name: Deploy DB Status App
 
 on:
@@ -19,6 +20,11 @@ jobs:
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
           tags: tag:ci
+
+      - name: Check Tailscale Connection
+        run: |
+          tailscale status
+          tailscale ping 100.83.142.106
 
       - name: Execute Remote Deployment via SSH
         uses: appleboy/ssh-action@v1.0.3
@@ -54,3 +60,4 @@ jobs:
             docker compose ps
 
             echo "Deployment successfully completed!"
+```
