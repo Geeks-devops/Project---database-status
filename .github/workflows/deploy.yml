@@ -36,18 +36,27 @@ jobs:
           script_stop: true
           script: |
             echo "Starting deployment on server..."
+
             whoami
             pwd
+
             ls -la /var/www/db-status-app
+
             cd /var/www/db-status-app || exit 1
+
             echo "Current directory:"
             pwd
+
             echo "Git repository:"
             git rev-parse --show-toplevel
+
             echo "Pulling latest code..."
-            sudo git pull origin main
+            git pull origin main
+
             echo "Starting Docker Compose..."
             docker compose up -d --build
+
             echo "Docker Compose status:"
             docker compose ps
+
             echo "Deployment successfully completed!"
