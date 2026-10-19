@@ -5,14 +5,15 @@ services:
   # ──────────────────────────────────────────
   postgresql:
     container_name: postgresql
-    image: postgres:18-bookworm        # официальный образ из Docker Hub
+    image: postgres:16-alpine   # официальный образ из Docker Hub
     restart: unless-stopped
     env_file: .env
     volumes:
-      - ./postgres_data:/var/lib/postgresql/   # данные хранятся между перезапусками
+      - ./postgres_data:/var/lib/postgresql/data   # данные хранятся между перезапусками
     expose:
-      - "5432"                    # пробрасываем порт для локальных инструментов
-
+      - "5432" 
+    healthcheck:
+      test: pg_isready -U appuser -d appdb
   # ──────────────────────────────────────────
   # Node.js бэкенд + встроенный фронтенд
   # ──────────────────────────────────────────
@@ -20,12 +21,15 @@ services:
   app:
     container_name: app
     build:
-      context: ./
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile.app
     restart: unless-stopped
     env_file: .env 
     ports:
-      - "80:3000"                    # приложение доступно на http://localhost:3000
-    depends_on: 
-      - postgresql
+      - "80:3000"
+    depends_on:
+      postgresql:
+        condition: service_healthy
 
+volumes:
+  postgres_data:   # том для хранения данных PostgreSQL

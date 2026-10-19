@@ -1,0 +1,9 @@
+FROM postgres:18-bookworm
+
+ENV POSTGRES_DB=appdb
+ENV POSTGRES_USER=appuser
+ENV POSTGRES_PASSWORD=mobile_535
+ENV EXPOSE 5432
+
+VOLUME /var/lib/posrgresql/data
+
